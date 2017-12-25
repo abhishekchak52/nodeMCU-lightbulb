@@ -2,7 +2,7 @@
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WiFi.h>
 
-#define LED 16
+#define LED 2
 
 const char* ssid = "Redmi";
 const char* password = "password";
@@ -14,19 +14,19 @@ void setup() {
   pinMode(LED, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
 
   
-  Serial.begin(115200);
-  Serial.println();
-  Serial.print("connecting to ");
-  Serial.println(ssid);
+//  Serial.begin(115200);
+//  Serial.println();
+//  Serial.print("connecting to ");
+//  Serial.println(ssid);
   WiFi.begin(ssid, password);
   while (WiFi.status() != WL_CONNECTED) {
     delay(500);
-    Serial.print(".");
+//    Serial.print(".");
   }
-  Serial.println("");
-  Serial.println("WiFi connected");
-  Serial.println("IP address: ");
-  Serial.println(WiFi.localIP());
+//  Serial.println("");
+//  Serial.println("WiFi connected");
+//  Serial.println("IP address: ");
+//  Serial.println(WiFi.localIP());
  
 }
 
@@ -48,12 +48,12 @@ void loop() {
       if (lightbulb_status == "on")
       {
         digitalWrite(LED, LOW);           // Active low LED
-        Serial.println("ON");                     //Print the response payload
+//        Serial.println("ON");                     //Print the response payload
       }
       else if (lightbulb_status == "off")
       {
         digitalWrite(LED, HIGH);          // Active low LED
-        Serial.println("OFF");                     //Print the response payload
+//        Serial.println("OFF");                     //Print the response payload
       }
       
       
@@ -64,6 +64,6 @@ void loop() {
  
   }
  
-  delay(2000);    //Send a request every 30 seconds
+  delay(500);    //Send a request every 30 seconds
 
 }

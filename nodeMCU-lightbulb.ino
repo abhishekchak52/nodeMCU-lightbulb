@@ -2,12 +2,17 @@
 #include <ESP8266HTTPClient.h>
 #include <ESP8266WiFi.h>
 
+#define LED 16
 
 const char* ssid = "Redmi";
 const char* password = "password";
 
+
+
 void setup() {
   // put your setup code here, to run once:
+  pinMode(LED, OUTPUT);     // Initialize the LED_BUILTIN pin as an output
+
   
   Serial.begin(115200);
   Serial.println();
@@ -40,7 +45,18 @@ void loop() {
       String payload = http.getString();   //Get the request response payload
       JsonObject& response = jsonBuffer.parseObject(payload);
       String lightbulb_status = response["state"];
-      Serial.println(lightbulb_status);                     //Print the response payload
+      if (lightbulb_status == "on")
+      {
+        digitalWrite(LED, LOW);           // Active low LED
+        Serial.println("ON");                     //Print the response payload
+      }
+      else if (lightbulb_status == "off")
+      {
+        digitalWrite(LED, HIGH);          // Active low LED
+        Serial.println("OFF");                     //Print the response payload
+      }
+      
+      
  
     }
  
